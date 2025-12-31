@@ -1,184 +1,149 @@
-# AutoML-Advisor
+# Intelligent EDA and ML Decision System
 
-AutoML-Advisor is an intelligent, dataset-agnostic Streamlit application that performs deep Exploratory Data Analysis (EDA) and provides theory-backed machine learning guidance — before a single model is trained.
+This project is a data-centric machine learning support system that performs structured exploratory data analysis, data quality checks, and guided preprocessing decisions, followed by baseline model validation.
 
-Unlike AutoML tools that jump straight to modeling, AutoML-Advisor thinks like a data scientist first.
+The goal is to reduce common mistakes in early ML workflows by making data decisions explicit, explainable, and verifiable.
 
-# What AutoML-Advisor Does
+# Motivation
 
-AutoML-Advisor analyzes your dataset step-by-step and answers the most important ML questions:
+In real-world machine learning, model performance is often limited by:
 
-# 1. Data Understanding
+poor handling of missing values
 
-Dataset shape & structure
+inappropriate feature selection
 
-Numeric vs categorical feature detection
+unnoticed data leakage
 
-Automatic ML task detection (Regression / Classification)
+lack of validation after preprocessing
 
-# 2. Distribution Intelligence (Core Strength)
+This system focuses on decision quality before model complexity.
 
-For each selected variable, the app analyzes:
+# Core Functionality
+Dataset Overview
 
-Central Tendency
+Row and column statistics
 
-Mean, Median, Mode
+Missing value summary
 
-Spread
+Automatic task type detection (classification or regression)
 
-Range, Standard Deviation, IQR
+Target Analysis
 
-Shape
+Distribution visualization
 
-Skewness
+Skewness analysis
 
-Kurtosis
+Guidance on transformation impact
 
-Visual Analysis
+Distribution Analysis (Feature-Level)
 
-Histogram
+For any selected feature:
 
-KDE
+Variable type detection
 
-Boxplot
+Central tendency (mean, median, mode)
 
-Quantiles
+Spread (range, IQR, standard deviation)
 
-Q1, Median, Q3
+Shape (skewness, kurtosis)
 
-Percentiles
+Visual inspection (histogram, boxplot)
 
- Includes beginner-friendly theory explaining why each concept matters.
+Missing Value Intelligence
 
-# 3. Missing Value Intelligence
+Column-wise missing percentage detection
 
-Instead of blindly filling or dropping missing data, AutoML-Advisor decides why values are missing and suggests the best action:
+Data-type aware recommendations
 
-- Drop columns (too sparse, weak signal)
+Strategy ranking based on skewness, missing rate, and cardinality
 
-- Transform features (missing = absence of event)
+Detection of semantic missing values (e.g. "Missing", "Unknown")
 
-- Impute using statistical / ML-friendly strategies
+Human-Approved Action
 
-- Explains when missing values are actually informative.
+Apply recommended imputation strategies
 
-# 4. Outlier Intelligence
+Dataset is updated persistently using session state
 
-Automatically detects whether a feature is continuous or categorical
+Clear feedback when missing values are resolved
 
-Applies IQR & Z-Score methods only where valid
+Outlier Intelligence
 
-Detects skewness before suggesting removal
+IQR-based and Z-score analysis
 
-Advises:
+Skewness-aware recommendations
 
-cap/remove
+Strategy ranking (transform, cap, remove)
 
-transform (log / power)
+Prevents incorrect outlier handling on discrete or ID columns
 
-ignore (tree-based models)
+Feature Selection
 
-- Prevents one of the most common ML mistakes.
+Automatically identifies:
 
-# 5. Feature Selection Guidance
+ID and index-like columns
 
-Identifies features that usually hurt model performance:
-
-ID columns
+Constant features
 
 Extremely high-cardinality features
 
-Near-constant features
+Human-Approved Action
 
-- Explains bias, noise, and overfitting risks.
+Drop low-value features
 
-# 6. Feature Engineering Suggestions
+Dataset structure updates dynamically
 
-AutoML-Advisor never leaves this empty.
+Feature Predictive Power (Model-Free)
 
-It dynamically suggests:
+Uses mutual information, correlation, and entropy reduction
 
-Binary features from missingness
+No model training required
 
-Aggregations
+Ranks features by contribution to the target
 
-Ratios & rates
+Data Leakage Detection
 
-Encoding strategies (OHE / ordinal)
+Detects suspiciously high correlation with target
 
-Scaling / normalization when required
+Flags target-derived column names
 
-- Teaches feature thinking, not just coding.
+Highlights post-event information risks
 
-# 7. ML Model Recommendations
+Baseline Model Validation
 
-Based on:
+After preprocessing actions, a baseline model is trained to validate whether the dataset quality has improved.
 
-Target type
+Algorithm: Linear Regression (baseline)
 
-Distribution
+Purpose: validation, not optimization
 
-Feature mix
+Metric: R² (regression) or accuracy (classification)
 
-Outliers
+Displayed outputs:
 
-Missing data patterns
+Model used
 
-It recommends Top 5 ML models and explains why each fits the dataset.
+Evaluation metric and score
 
-Examples:
+Top contributing features
 
-Random Forest
+Validation message indicating whether agent decisions improved the dataset
 
-XGBoost / LightGBM
+ML Readiness Score
 
-CatBoost
+A dynamic score representing how suitable the dataset is for machine learning.
 
-Logistic / ElasticNet
+Factors considered:
 
-SVM (when appropriate)
-
-# 8. ML Readiness Score
-
-A final ML Readiness Score (0–100) based on:
-
-Missing value severity
+Remaining missing values
 
 Feature quality
 
-Distribution health
+Target skewness
 
-Outlier risk
+The score updates automatically after preprocessing actions such as imputation and feature selection.
 
-Clearly answers:
-
-“Can I train a reliable ML model on this data?”
-
-# Design Philosophy
-
-“EDA before ML, understanding before automation.”
-
-AutoML-Advisor:
-
-- Does NOT auto-train black-box models
-
-✅ Teaches why decisions are made
-
-✅ Works with any CSV
-
-✅ Avoids dataset-specific hardcoding
-
-This makes it ideal for:
-
-Students
-
-Researchers
-
-Data analysts
-
-Early-stage ML projects
-
-# Tech Stack
+# Technology Stack
 
 Python
 
@@ -186,19 +151,33 @@ Streamlit
 
 Pandas, NumPy
 
-Matplotlib, Seaborn
+Scikit-learn
 
 SciPy
 
-Scikit-learn (for logic, not pipelines)
+Matplotlib, Seaborn
 
-# Project Structure
-AutoML-Advisor/
-├── app/
-│   └── app.py
-├── requirements.txt
-├── README.md
+Intended Use
+
+# Understanding real-world EDA workflows
+
+Learning data-driven ML decision making
+
+Preparing datasets before model training
+
+Portfolio project for AI/ML internships
+
+# Project Status
+
+Semi-agent system with human-approved actions implemented
+
+Baseline validation workflow completed
+
+Future work includes cross-validation comparison and dataset export
 
 # Author
+
 Pranjal Tyagi
+B.Tech CSE (AI & Data Science)
+IIIT Kottayam
 B.Tech CSE (AI & DS)
