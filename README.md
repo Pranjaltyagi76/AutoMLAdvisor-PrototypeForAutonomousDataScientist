@@ -174,6 +174,9 @@ Semi-agent system with human-approved actions implemented
 Baseline validation workflow completed
 
 Future work includes cross-validation comparison and dataset export
+# Future RoadMap
+I will implement this Basic EDA system to advanced EDA and also add multiple agents for work
+Future Upgraded Version===  # Autonomous Data Scientist
 
 # Author
 
